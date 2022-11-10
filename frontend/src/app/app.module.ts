@@ -11,7 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
+import {StoreModule} from '@ngrx/store';
+import {reducers} from './project/state/index';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,9 +25,10 @@ import { QuillModule } from 'ngx-quill'
     AppRoutingModule,
     NzSpinModule,
     NzIconModule.forRoot([]),
+    StoreModule.forRoot(reducers),
     environment.production ? [] : AkitaNgDevtools,
     AkitaNgRouterStoreModule,
-    QuillModule.forRoot()    
+    QuillModule.forRoot()
   ],
   providers: [
     {

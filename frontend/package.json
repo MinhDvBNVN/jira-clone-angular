@@ -24,6 +24,8 @@
     "@datorama/akita-ng-entity-service": "^2.0.0",
     "@ngneat/content-loader": "^4.1.0",
     "@ngneat/until-destroy": "^7.1.6",
+    "@ngrx/effects": "^9.2.1",
+    "@ngrx/store": "^9.2.1",
     "date-fns": "^2.14.0",
     "ng-zorro-antd": "^9.1.2",
     "ngx-quill": "^11.1.0",
