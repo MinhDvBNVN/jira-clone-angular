@@ -13,7 +13,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { QuillModule } from 'ngx-quill';
 import {StoreModule} from '@ngrx/store';
-import {reducers} from './project/state/index';
+import {reducers} from './project/state';
 
 @NgModule({
   declarations: [AppComponent],

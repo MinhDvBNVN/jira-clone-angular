@@ -1,6 +1,6 @@
 import {ProjectState} from '@trungk18/project/state/reducers/project.reducer';
 import {FilterState} from '@trungk18/project/state/reducers/filter.reducer';
-import {ActionReducerMap} from '@ngrx/store';
+import {ActionReducerMap, createFeatureSelector, createSelector} from '@ngrx/store';
 import * as project from '@trungk18/project/state/reducers/project.reducer';
 import * as filter from '@trungk18/project/state/reducers/filter.reducer';
 
@@ -13,3 +13,9 @@ export const reducers: ActionReducerMap<State> = {
   project: project.reducer,
   filter: filter.reducer
 };
+
+export const getAllIssues = createFeatureSelector<project.ProjectState>('issues');
+
+export const allIssues = createSelector(getAllIssues, (state) => {
+  return state.issues;
+});

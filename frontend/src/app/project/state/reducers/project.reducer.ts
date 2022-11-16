@@ -1,8 +1,13 @@
 import {JProject, ProjectCategory} from '@trungk18/interface/project';
-import {Action, createReducer} from "@ngrx/store";
+import {Action, createReducer, on} from '@ngrx/store';
+import * as projectAction from '../actions/project.action';
+import {DateUtil} from '@trungk18/project/utils/date';
+import {arrayRemove, arrayUpsert} from '@datorama/akita';
 
 // tslint:disable-next-line:no-empty-interface
-export interface ProjectState extends JProject {}
+export interface ProjectState extends JProject {
+  isLoading: boolean;
+}
 
 export const initialState: ProjectState = {
   id: null,
@@ -13,11 +18,65 @@ export const initialState: ProjectState = {
   createdAt: null,
   updateAt: null,
   issues: [],
-  users: []
+  users: [],
+  isLoading: false
 };
 
 const projectRecuder = createReducer(
-  initialState
+  initialState,
+  on(projectAction.getProject, (state, result) => {
+    return {
+      ...state,
+      isLoading: true
+    };
+  }),
+  on(projectAction.getProjectSuccess, (state, result) => {
+    return {
+      ...state,
+      ...result
+    };
+  }),
+  on(projectAction.updateProject, (state, result) => ({...state, isLoading: true})),
+  on(projectAction.updateProjectSuccess, (state, result) => {
+    return {
+      ...state,
+      ...result,
+      isLoading: false
+    };
+  }),
+  on(projectAction.updateIssue, (state, result) => ({...state, isLoading: true})),
+  on(projectAction.updateIssueSuccess, (state, result) => {
+    result.updatedAt = DateUtil.getNow();
+    const issues = arrayUpsert(state.issues, result.id, result);
+    return {
+      ...state,
+      issues,
+      isLoading: false
+    };
+  }),
+  on(projectAction.deleteIssue, (state, result) => ({...state, isLoading: true})),
+  on(projectAction.deleteIssueSuccess, (state, result) => {
+    const issues = arrayRemove(state.issues, result);
+    return {
+      ...state,
+      issues,
+      isLoading: false
+    };
+  }),
+  on(projectAction.updateIssueComment, (state, result) => ({...state, isLoading: true})),
+  on(projectAction.updateIssueCommentSuccess, (state, result) => {
+    const allIssues = state.issues;
+    const issue = allIssues.find((x) => x.id === result.issueId);
+    if (!issue) {
+      return;
+    }
+    const comments = arrayUpsert(issue.comments ?? [], result.comment.id, result.comment);
+    return  {
+      ...state,
+      ...issue,
+      comments
+    };
+  })
 );
 
 export function reducer(state: ProjectState | undefined, action: Action): any {
