@@ -32,7 +32,14 @@ export const authReducer = createReducer(
       ...state,
       isLoading: true
     };
-  }))
+  })),
+  on(authAction.loginSuccess, (state, action) => {
+    return {
+      ...state,
+      user: action.user,
+      isLoading: false
+    };
+  })
 );
 
 export function reducer(state: AuthState | undefined, action: Action): any {

@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc0140e5-8b3c-47e9-bfd2-785f5e58fe18" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/project/state/actions/auth.action.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/project/state/reducers/auth.reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/project/state/selectors/filter.selector.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/project/state/selectors/project.selector.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/project/state/selectors/auth.selector.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/state/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/reducers/auth.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/state/reducers/auth.reducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +31,17 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../angular-ngrx-example" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="D:\Source\jira-clone-angular\backend\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Study\SourceCode\jira-clone-angular\backend\node_modules\typescript\lib" />
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="dc0140e5-8b3c-47e9-bfd2-785f5e58fe18" name="Changes" comment="" />
@@ -62,7 +66,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
