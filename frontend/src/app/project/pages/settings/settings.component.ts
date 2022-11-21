@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectConst } from '@trungk18/project/config/const';
 import { JProject, ProjectCategory } from '@trungk18/interface/project';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NoWhitespaceValidator } from '@trungk18/core/validators/no-whitespace.validator';
-
+import {Store} from '@ngrx/store';
+import * as projectSelector from '../../state/selectors/project.selector';
+import * as projectAction from '../../state/actions/project.action';
 @Component({
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
@@ -23,11 +23,10 @@ export class SettingsComponent implements OnInit {
   }
 
   constructor(
-    private _projectQuery: ProjectQuery,
-    private _projectService: ProjectService,
     private _notification: NzNotificationService,
     private _fb: FormBuilder,
-    private _router: Router
+    private _router: Router,
+    private store: Store
   ) {
     this.categories = [
       ProjectCategory.BUSINESS,
@@ -38,7 +37,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this._projectQuery.all$.pipe(untilDestroyed(this)).subscribe((project) => {
+    this.store.select(projectSelector.all$).pipe(untilDestroyed(this)).subscribe((project) => {
       this.project = project;
       this.updateForm(project);
     });
@@ -63,12 +62,12 @@ export class SettingsComponent implements OnInit {
   }
 
   submitForm() {
-    let formValue: Partial<JProject> = this.projectForm.getRawValue();
-    this._projectService.updateProject(formValue);
+    const formValue: Partial<JProject> = this.projectForm.getRawValue();
+    this.store.dispatch(projectAction.updateProjectSuccess({formValue}));
     this._notification.create(
-      "success",
+      'success',
       'Changes have been saved successfully.',
-      ""      
+      ''
     );
   }
 

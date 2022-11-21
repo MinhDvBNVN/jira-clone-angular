@@ -3,8 +3,9 @@ import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JComment } from '@trungk18/interface/comment';
 import { JUser } from '@trungk18/interface/user';
-import { AuthQuery } from '@trungk18/project/auth/auth.query';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
+import * as authSelector from '../../../state/selectors/auth.selector';
+import * as projectAction from '../../../state/actions/project.action';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'issue-comment',
@@ -21,14 +22,14 @@ export class IssueCommentComponent implements OnInit {
   user: JUser;
   isEditing: boolean;
 
-  constructor(private _authQuery: AuthQuery, private projectService: ProjectService) {}
+  constructor(private store: Store) {}
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (!this.createMode || this.isEditing) {
       return;
     }
-    if (event.key == 'M') {
+    if (event.key === 'M') {
       this.commentBoxRef.nativeElement.focus();
       this.isEditing = true;
     }
@@ -36,7 +37,7 @@ export class IssueCommentComponent implements OnInit {
 
   ngOnInit(): void {
     this.commentControl = new FormControl('');
-    this._authQuery.user$.pipe(untilDestroyed(this)).subscribe((user) => {
+    this.store.select(authSelector.user$).pipe(untilDestroyed(this)).subscribe((user) => {
       this.user = user;
       if (this.createMode) {
         this.comment = new JComment(this.issueId, this.user);
@@ -49,14 +50,17 @@ export class IssueCommentComponent implements OnInit {
   }
 
   addComment() {
-    let now = new Date();
-    this.projectService.updateIssueComment(this.issueId, {
-      ...this.comment,
-      id: `${now.getTime()}`,
-      createdAt: now.toISOString(),
-      updatedAt: now.toISOString(),
-      body: this.commentControl.value
-    });
+    const now = new Date();
+    this.store.dispatch(projectAction.updateIssueCommentSuccess({
+      issueId: this.issueId,
+      comment: {
+        ...this.comment,
+        id: `${now.getTime()}`,
+        createdAt: now.toISOString(),
+        updatedAt: now.toISOString(),
+        body: this.commentControl.value
+      }
+    }));
     this.cancelAddComment();
   }
 

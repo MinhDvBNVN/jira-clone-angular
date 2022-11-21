@@ -2,7 +2,8 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { JIssue } from '@trungk18/interface/issue';
 import { JUser } from '@trungk18/interface/user';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
+import * as projectAction from '../../../state/actions/project.action';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'issue-reporter',
@@ -15,12 +16,12 @@ export class IssueReporterComponent implements OnInit, OnChanges {
   @Input() users: JUser[];
   reporter: JUser;
 
-  constructor(private _projectService: ProjectService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
-    let issueChange = changes.issue;
+    const issueChange = changes.issue;
     if (this.users && issueChange.currentValue !== issueChange.previousValue) {
       this.reporter = this.users.find((x) => x.id === this.issue.reporterId);
     }
@@ -31,9 +32,11 @@ export class IssueReporterComponent implements OnInit, OnChanges {
   }
 
   updateIssue(user: JUser) {
-    this._projectService.updateIssue({
-      ...this.issue,
-      reporterId: user.id
-    });
+    this.store.dispatch(projectAction.updateIssueSuccess({
+      newIssue: {
+        ...this.issue,
+        reporterId: user.id
+      }
+    }));
   }
 }

@@ -19,18 +19,18 @@ export const initialState: FilterState = {
 
 export const filterReducer = createReducer(
   initialState,
-  on(filterAction.updateSearchTerm, (state, result) => {
+  on(filterAction.updateSearchTerm, (state, action) => {
     return {
       ...state,
-      searchTerm: result
+      searchTerm: action.term
     };
   }),
   on(filterAction.toggleUserID, (state, result) => ({...this.state, isLoading: true})),
-  on(filterAction.toggleUserIDSuccess, (state, userId) => {
-    const hasUser = state.userIds.includes(userId);
+  on(filterAction.toggleUserIDSuccess, (state, action) => {
+    const hasUser = state.userIds.includes(action.userId);
     const userIds = hasUser
-      ? state.userIds.filter((x) => x !== userId)
-      : [...state.userIds, userId];
+      ? state.userIds.filter((x) => x !== action.userId)
+      : [...state.userIds, action.userId];
     return {
       ...state,
       userIds,

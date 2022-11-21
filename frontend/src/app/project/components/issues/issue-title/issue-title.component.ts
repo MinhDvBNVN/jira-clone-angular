@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { JIssue } from '@trungk18/interface/issue';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
-
+import * as projectAction from '../../../state/actions/project.action';
+import {Store} from '@ngrx/store';
 @Component({
   selector: 'issue-title',
   templateUrl: './issue-title.component.html',
@@ -12,19 +12,19 @@ export class IssueTitleComponent implements OnChanges {
   @Input() issue: JIssue;
   titleControl: FormControl;
 
-  constructor(private _projectService: ProjectService) {}
+  constructor(private store: Store) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    let issueChange = changes.issue;
+    const issueChange = changes.issue;
     if (issueChange.currentValue !== issueChange.previousValue) {
       this.titleControl = new FormControl(this.issue.title);
     }
   }
 
   onBlur() {
-    this._projectService.updateIssue({
-      ...this.issue,
-      title: this.titleControl.value
-    });
+    this.store.dispatch(projectAction.updateIssueSuccess({newIssue: {
+        ...this.issue,
+        title: this.titleControl.value
+      }}));
   }
 }

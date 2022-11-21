@@ -2,9 +2,9 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { JIssue, IssuePriority } from '@trungk18/interface/issue';
 import { IssuePriorityIcon } from '@trungk18/interface/issue-priority-icon';
 import { IssueUtil } from '@trungk18/project/utils/issue';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
 import { ProjectConst } from '@trungk18/project/config/const';
-
+import * as projectAction from '../../../state/actions/project.action';
+import {Store} from '@ngrx/store';
 @Component({
   selector: 'issue-priority',
   templateUrl: './issue-priority.component.html',
@@ -21,7 +21,7 @@ export class IssuePriorityComponent implements OnInit, OnChanges {
 
   @Input() issue: JIssue;
 
-  constructor(private _projectService: ProjectService) {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.priorities = ProjectConst.PrioritiesWithIcon;
@@ -37,9 +37,9 @@ export class IssuePriorityComponent implements OnInit, OnChanges {
 
   updateIssue(priority: IssuePriority) {
     this.selectedPriority = priority;
-    this._projectService.updateIssue({
-      ...this.issue,
-      priority: this.selectedPriority
-    });
+    this.store.dispatch(projectAction.updateIssueSuccess({newIssue: {
+        ...this.issue,
+        priority: this.selectedPriority
+      }}));
   }
 }

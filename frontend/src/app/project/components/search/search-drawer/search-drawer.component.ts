@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { JIssue } from '@trungk18/interface/issue';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
-import { IssueUtil } from '@trungk18/project/utils/issue';
-import { NzDrawerRef } from 'ng-zorro-antd/drawer';
-import { combineLatest, Observable, of } from 'rxjs';
-import { map, switchMap, debounceTime } from 'rxjs/operators';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { IssueModalComponent } from '../../issues/issue-modal/issue-modal.component';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {JIssue} from '@trungk18/interface/issue';
+import {IssueUtil} from '@trungk18/project/utils/issue';
+import {NzDrawerRef} from 'ng-zorro-antd/drawer';
+import {combineLatest, Observable, of} from 'rxjs';
+import {debounceTime, delay, map, switchMap} from 'rxjs/operators';
+import {NzModalService} from 'ng-zorro-antd/modal';
+import {IssueModalComponent} from '../../issues/issue-modal/issue-modal.component';
+import {Store} from "@ngrx/store";
+import * as projectSelector from '../../../state/selectors/project.selector';
 
 @Component({
   selector: 'search-drawer',
@@ -26,20 +27,20 @@ export class SearchDrawerComponent implements OnInit {
   }
 
   constructor(
-    private _projectQuery: ProjectQuery,
     private _drawer: NzDrawerRef,
-    private _modalService: NzModalService
+    private _modalService: NzModalService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
-    let search$ = this.searchControl.valueChanges.pipe(debounceTime(50));
-    this.recentIssues$ = this._projectQuery.issues$.pipe(map((issues) => issues.slice(0, 5)));
-    this.results$ = combineLatest([search$, this._projectQuery.issues$]).pipe(
+    const search$ = this.searchControl.valueChanges.pipe(debounceTime(50));
+    this.recentIssues$ = this.store.select(projectSelector.issues$).pipe(map((issues) => issues.slice(0, 5)));
+    this.results$ = combineLatest([search$, this.store.select(projectSelector.issues$)]).pipe(
       untilDestroyed(this),
       switchMap(([term, issues]) => {
-        let matchIssues = issues.filter((issue) => {
-          let foundInTitle = IssueUtil.searchString(issue.title, term);
-          let foundInDescription = IssueUtil.searchString(issue.description, term);
+        const matchIssues = issues.filter((issue) => {
+          const foundInTitle = IssueUtil.searchString(issue.title, term);
+          const foundInDescription = IssueUtil.searchString(issue.description, term);
           return foundInTitle || foundInDescription;
         });
         return of(matchIssues);
@@ -58,9 +59,19 @@ export class SearchDrawerComponent implements OnInit {
       nzClosable: false,
       nzFooter: null,
       nzComponentParams: {
-        issue$: this._projectQuery.issueById$(issue.id)
+        issue$: this.issueById(issue.id)
       }
     });
     this.closeDrawer();
   }
+
+  issueById(issueId: string){
+    return this.store.select(projectSelector.issues$).pipe(
+      delay(500),
+      map((issues) => {
+        return issues.find(x => x.id === issueId);
+      })
+    );
+  }
+
 }

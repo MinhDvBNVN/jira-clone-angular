@@ -3,7 +3,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JProject } from '@trungk18/interface/project';
 import { SideBarLink } from '@trungk18/interface/ui-model/nav-link';
 import { SideBarLinks } from '@trungk18/project/config/sidebar';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
+import {Store} from '@ngrx/store';
+import * as projectSelector from '../../../state/selectors/project.selector';
 
 @Component({
   selector: 'app-sidebar',
@@ -21,8 +22,8 @@ export class SidebarComponent implements OnInit {
   project: JProject;
   sideBarLinks: SideBarLink[];
 
-  constructor(private _projectQuery: ProjectQuery) {
-    this._projectQuery.all$.pipe(untilDestroyed(this)).subscribe((project) => {
+  constructor(private store: Store) {
+    this.store.select(projectSelector.all$).pipe(untilDestroyed(this)).subscribe((project) => {
       this.project = project;
     });
   }

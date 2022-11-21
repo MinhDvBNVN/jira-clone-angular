@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthQuery } from '@trungk18/project/auth/auth.query';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { SearchDrawerComponent } from '../../search/search-drawer/search-drawer.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddIssueModalComponent } from '../../add-issue-modal/add-issue-modal.component';
+import {Observable} from 'rxjs';
+import * as authSelector from '../../../state/selectors/auth.selector';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-navbar-left',
@@ -12,13 +14,15 @@ import { AddIssueModalComponent } from '../../add-issue-modal/add-issue-modal.co
 })
 export class NavbarLeftComponent implements OnInit {
   items: NavItem[];
+  user$: Observable<any>;
   constructor(
-    public authQuery: AuthQuery,
     private _drawerService: NzDrawerService,
-    private _modalService: NzModalService
+    private _modalService: NzModalService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
+    this.user$ = this.store.select(authSelector.user$);
     this.items = [
       new NavItem('search', 'Search issues', this.openSearchDrawler.bind(this)),
       new NavItem('plus', 'Create issue', this.openCreateIssueModal.bind(this))

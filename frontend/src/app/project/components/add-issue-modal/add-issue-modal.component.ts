@@ -3,17 +3,16 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { IssueType, JIssue, IssueStatus, IssuePriority } from '@trungk18/interface/issue';
 import { quillConfiguration } from '@trungk18/project/config/editor';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
 import { IssueUtil } from '@trungk18/project/utils/issue';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
 import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { JUser } from '@trungk18/interface/user';
 import { tap } from 'rxjs/operators';
-import { until } from 'protractor';
 import { NoWhitespaceValidator } from '@trungk18/core/validators/no-whitespace.validator';
 import { DateUtil } from '@trungk18/project/utils/date';
-
+import {Store} from '@ngrx/store';
+import * as projectSelector from '../../state/selectors/project.selector';
+import * as projectAction from '../../state/actions/project.action';
 @Component({
   selector: 'add-issue-modal',
   templateUrl: './add-issue-modal.component.html',
@@ -33,23 +32,22 @@ export class AddIssueModalComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _modalRef: NzModalRef,
-    private _projectService: ProjectService,
-    public _projectQuery: ProjectQuery
+    private store: Store
   ) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.reporterUsers$ = this._projectQuery.users$.pipe(
+    this.reporterUsers$ = this.store.select(projectSelector.user$).pipe(
       untilDestroyed(this),
       tap((users) => {
-        let [user] = users;
+        const [user] = users;
         if (user) {
           this.f.reporterId.patchValue(user.id);
         }
       })
     );
 
-    this.assignees$ = this._projectQuery.users$;
+    this.assignees$ = this.store.select(projectSelector.user$);
   }
 
   initForm() {
@@ -67,8 +65,8 @@ export class AddIssueModalComponent implements OnInit {
     if (this.issueForm.invalid) {
       return;
     }
-    let now = DateUtil.getNow();
-    let issue: JIssue = {
+    const now = DateUtil.getNow();
+    const issue: JIssue = {
       ...this.issueForm.getRawValue(),
       id: IssueUtil.getRandomId(),
       status: IssueStatus.BACKLOG,
@@ -76,7 +74,7 @@ export class AddIssueModalComponent implements OnInit {
       updatedAt: now
     };
 
-    this._projectService.updateIssue(issue);
+    this.store.dispatch(projectAction.updateIssueSuccess({newIssue: issue}));
     this.closeModal();
   }
 

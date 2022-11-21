@@ -18,7 +18,7 @@ export const TOGGLE_IGNORE_RESOLVE_FAILURE = '[Filter] Toggle Ignore Resolve Fai
 
 export const updateSearchTerm = createAction(
   UPDATE_SEARCH_TERM,
-  props<any>()
+  props<{term}>()
 );
 
 export const toggleUserID = createAction(
@@ -28,7 +28,7 @@ export const toggleUserID = createAction(
 
 export const toggleUserIDSuccess = createAction(
   TOGGLE_USER_ID_SUCCESS,
-  props<any>()
+  props<{ userId }>()
 );
 
 export const toggleUserIDFailure = createAction(
@@ -37,8 +37,7 @@ export const toggleUserIDFailure = createAction(
 );
 
 export const toggleOnlyMyIssue = createAction(
-  TOGGLE_ONLY_MY_ISSUE,
-  props<any>()
+  TOGGLE_ONLY_MY_ISSUE
 );
 
 export const toggleOnlyMyIssueSuccess = createAction(
@@ -53,8 +52,7 @@ export const toggleOnlyMyIssueFailure = createAction(
 
 
 export const toggleIgnoreResolve = createAction(
-  TOGGLE_ONLY_MY_ISSUE,
-  props<any>()
+  TOGGLE_ONLY_MY_ISSUE
 );
 
 export const toggleIgnoreResolveSuccess = createAction(

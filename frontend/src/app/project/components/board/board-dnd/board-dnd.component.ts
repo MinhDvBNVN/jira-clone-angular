@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { IssueStatus } from '@trungk18/interface/issue';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
-import { AuthQuery } from '@trungk18/project/auth/auth.query';
+import {IssueStatus, JIssue} from '@trungk18/interface/issue';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+
+import * as projectSelector from '../../../state/selectors/project.selector';
+import * as authSelector from '../../../state/selectors/auth.selector';
+
 @UntilDestroy()
 @Component({
   selector: 'board-dnd',
@@ -17,7 +22,23 @@ export class BoardDndComponent implements OnInit {
     IssueStatus.DONE
   ];
 
-  constructor(public projectQuery: ProjectQuery, public authQuery: AuthQuery) {}
+  userId$: Observable<any>;
 
-  ngOnInit(): void {}
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.userId$ = this.store.select(authSelector.userId$);
+  }
+
+  issueByStatusSorted$ = (status: IssueStatus): Observable<JIssue[]> => {
+    return this.store.select(projectSelector.issues$).pipe(
+      map((issues) => {
+        const filteredIssues = issues
+          .filter((x) => x.status === status)
+          .sort((a, b) => a.listPosition - b.listPosition);
+        return filteredIssues;
+      })
+    );
+  }
+
 }

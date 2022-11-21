@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FilterQuery } from '@trungk18/project/state/filter/filter.query';
-import { FilterService } from '@trungk18/project/state/filter/filter.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
 import { JUser } from '@trungk18/interface/user';
+import {Store} from '@ngrx/store';
+import * as filterAction from '../../../state/actions/filter.action';
+import * as filterSelector from '../../../state/selectors/filter.selector';
+import * as projectSelector from '../../../state/selectors/project.selector';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'board-filter',
@@ -14,13 +16,15 @@ import { JUser } from '@trungk18/interface/user';
 })
 @UntilDestroy()
 export class BoardFilterComponent implements OnInit {
-  searchControl: FormControl = new FormControl("");
+  searchControl: FormControl = new FormControl('');
   userIds: string[];
 
+  users$: Observable<any>;
+  onlyMyIssue$: Observable<any>;
+  ignoreResolve$: Observable<any>;
+  any$: Observable<any>;
   constructor(
-    public projectQuery: ProjectQuery,
-    public filterQuery: FilterQuery,
-    public filterService: FilterService
+    private store: Store
   ) {
     this.userIds = [];
   }
@@ -29,10 +33,14 @@ export class BoardFilterComponent implements OnInit {
     this.searchControl.valueChanges
       .pipe(debounceTime(100), distinctUntilChanged(), untilDestroyed(this))
       .subscribe((term) => {
-        this.filterService.updateSearchTerm(term);
+        this.store.dispatch(filterAction.updateSearchTerm({term}));
       });
 
-    this.filterQuery.userIds$.pipe(untilDestroyed(this)).subscribe((userIds) => {
+    this.users$ = this.store.select(projectSelector.user$);
+    this.onlyMyIssue$ = this.store.select(filterSelector.onlyMyIssue$);
+    this.ignoreResolve$ = this.store.select(filterSelector.ignoreResolve$);
+    this.any$ = this.store.select(filterSelector.any$);
+    this.store.select(filterSelector.userIds$).pipe(untilDestroyed(this)).subscribe((userIds) => {
       this.userIds = userIds;
     });
   }
@@ -42,19 +50,18 @@ export class BoardFilterComponent implements OnInit {
   }
 
   ignoreResolvedChanged() {
-    this.filterService.toggleIgnoreResolve();
+    this.store.dispatch(filterAction.toggleIgnoreResolve());
   }
 
   onlyMyIssueChanged() {
-    this.filterService.toggleOnlyMyIssue();
+    this.store.dispatch(filterAction.toggleOnlyMyIssue());
   }
 
   userChanged(user: JUser) {
-    this.filterService.toggleUserId(user.id);
+    this.store.dispatch(filterAction.toggleUserIDSuccess({userId: user.id}));
   }
 
   resetAll() {
     this.searchControl.setValue('');
-    this.filterService.resetAll();
   }
 }

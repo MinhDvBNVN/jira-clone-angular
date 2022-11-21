@@ -30,24 +30,25 @@ const projectRecuder = createReducer(
       isLoading: true
     };
   }),
-  on(projectAction.getProjectSuccess, (state, result) => {
+  on(projectAction.getProjectSuccess, (state, action) => {
     return {
       ...state,
-      ...result
+      ...action.project,
+      isLoading: false
     };
   }),
   on(projectAction.updateProject, (state, result) => ({...state, isLoading: true})),
-  on(projectAction.updateProjectSuccess, (state, result) => {
+  on(projectAction.updateProjectSuccess, (state, action) => {
     return {
       ...state,
-      ...result,
+      ...action.formValue,
       isLoading: false
     };
   }),
   on(projectAction.updateIssue, (state, result) => ({...state, isLoading: true})),
-  on(projectAction.updateIssueSuccess, (state, result) => {
-    result.updatedAt = DateUtil.getNow();
-    const issues = arrayUpsert(state.issues, result.id, result);
+  on(projectAction.updateIssueSuccess, (state, action) => {
+    action.newIssue.updatedAt = DateUtil.getNow();
+    const issues = arrayUpsert(state.issues, action.newIssue.id, action.newIssue);
     return {
       ...state,
       issues,
@@ -55,8 +56,8 @@ const projectRecuder = createReducer(
     };
   }),
   on(projectAction.deleteIssue, (state, result) => ({...state, isLoading: true})),
-  on(projectAction.deleteIssueSuccess, (state, result) => {
-    const issues = arrayRemove(state.issues, result);
+  on(projectAction.deleteIssueSuccess, (state, action) => {
+    const issues = arrayRemove(state.issues, action.issueId);
     return {
       ...state,
       issues,
@@ -64,13 +65,13 @@ const projectRecuder = createReducer(
     };
   }),
   on(projectAction.updateIssueComment, (state, result) => ({...state, isLoading: true})),
-  on(projectAction.updateIssueCommentSuccess, (state, result) => {
+  on(projectAction.updateIssueCommentSuccess, (state, action) => {
     const allIssues = state.issues;
-    const issue = allIssues.find((x) => x.id === result.issueId);
+    const issue = allIssues.find((x) => x.id === action.issueId);
     if (!issue) {
       return;
     }
-    const comments = arrayUpsert(issue.comments ?? [], result.comment.id, result.comment);
+    const comments = arrayUpsert(issue.comments ?? [], action.comment.id, action.comment);
     return  {
       ...state,
       ...issue,

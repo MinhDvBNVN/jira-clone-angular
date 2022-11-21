@@ -1,23 +1,23 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import { JIssue } from '@trungk18/interface/issue';
 import { FormControl } from '@angular/forms';
 import { quillConfiguration } from '@trungk18/project/config/editor';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
-
+import {Store} from '@ngrx/store';
+import * as projectAction from '../../../state/actions/project.action';
 @Component({
   selector: 'issue-description',
   templateUrl: './issue-description.component.html',
   styleUrls: ['./issue-description.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class IssueDescriptionComponent implements OnChanges {
+export class IssueDescriptionComponent implements OnChanges, OnInit {
   @Input() issue: JIssue;
   descriptionControl: FormControl;
   editorOptions = quillConfiguration;
   isEditing: boolean;
   isWorking: boolean;
 
-  constructor(private _projectService: ProjectService) {}
+  constructor(private store: Store) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     let issueChange = changes.issue;
@@ -35,10 +35,10 @@ export class IssueDescriptionComponent implements OnChanges {
   }
 
   save() {
-    this._projectService.updateIssue({
-      ...this.issue,
-      description: this.descriptionControl.value
-    });
+    this.store.dispatch(projectAction.updateIssueSuccess({newIssue: {
+        ...this.issue,
+        description: this.descriptionControl.value
+      }}));
     this.setEditMode(false);
   }
 

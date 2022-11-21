@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectConst } from '@trungk18/project/config/const';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
 import { JProject } from '@trungk18/interface/project';
 import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { JIssue } from '@trungk18/interface/issue';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
 import { DeleteIssueModel } from '@trungk18/interface/ui-model/delete-issue-model';
-
+import {Store} from '@ngrx/store';
+import * as projectSelector from '../../state/selectors/project.selector';
+import * as projectAction from '../../state/actions/project.action';
+import {delay, map} from "rxjs/operators";
 @Component({
   selector: 'full-issue-detail',
   templateUrl: './full-issue-detail.component.html',
@@ -26,13 +27,12 @@ export class FullIssueDetailComponent implements OnInit {
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
-    private _projectQuery: ProjectQuery,
-    private _projectService: ProjectService
+    private store: Store
   ) {}
 
   ngOnInit(): void {
     this.getIssue();
-    this._projectQuery.all$.pipe(untilDestroyed(this)).subscribe((project) => {
+    this.store.select(projectSelector.all$).pipe(untilDestroyed(this)).subscribe((project) => {
       this.project = project;
     });
   }
@@ -43,11 +43,21 @@ export class FullIssueDetailComponent implements OnInit {
       this.backHome();
       return;
     }
-    this.issueById$ = this._projectQuery.issueById$(this.issueId);
+    this.issueById$ = this.issueById(this.issueId);
+  }
+
+  issueById(issueId: string){
+    return this.store.select(projectSelector.issues$).pipe(
+      delay(500),
+      map((issues) => {
+        const issue = issues.find(x => x.id === issueId);
+        return issue;
+      })
+    );
   }
 
   deleteIssue({issueId, deleteModalRef}: DeleteIssueModel) {
-    this._projectService.deleteIssue(issueId);
+    this.store.dispatch(projectAction.deleteIssueSuccess({issueId}));
     deleteModalRef.close();
     this.backHome();
   }

@@ -1,12 +1,14 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JIssue } from '@trungk18/interface/issue';
 import { IssuePriorityIcon } from '@trungk18/interface/issue-priority-icon';
 import { JUser } from '@trungk18/interface/user';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
 import { IssueUtil } from '@trungk18/project/utils/issue';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { IssueModalComponent } from '../issue-modal/issue-modal.component';
+import {Store} from '@ngrx/store';
+import * as projectSelector from '../../../state/selectors/project.selector';
+import {delay, map} from 'rxjs/operators';
 
 @Component({
   selector: 'issue-card',
@@ -14,26 +16,36 @@ import { IssueModalComponent } from '../issue-modal/issue-modal.component';
   styleUrls: ['./issue-card.component.scss']
 })
 @UntilDestroy()
-export class IssueCardComponent implements OnChanges {
+export class IssueCardComponent implements OnChanges, OnInit {
   @Input() issue: JIssue;
   assignees: JUser[];
   issueTypeIcon: string;
   priorityIcon: IssuePriorityIcon;
 
-  constructor(private _projectQuery: ProjectQuery, private _modalService: NzModalService) {}
+  constructor(private _modalService: NzModalService, private store: Store) {}
 
   ngOnInit(): void {
-    this._projectQuery.users$.pipe(untilDestroyed(this)).subscribe((users) => {
+    this.store.select(projectSelector.user$).pipe(untilDestroyed(this)).subscribe((users) => {
       this.assignees = this.issue.userIds.map((userId) => users.find((x) => x.id === userId));
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    let issueChange = changes.issue;
+    const issueChange = changes.issue;
     if (issueChange?.currentValue !== issueChange.previousValue) {
       this.issueTypeIcon = IssueUtil.getIssueTypeIcon(this.issue.type);
       this.priorityIcon = IssueUtil.getIssuePriorityIcon(this.issue.priority);
     }
+  }
+
+  issueById$(issueId: string){
+    return this.store.select(projectSelector.issues$).pipe(
+      delay(500),
+      map((issues) => {
+        const issue = issues.find(x => x.id === issueId);
+        return issue;
+      })
+    );
   }
 
   openIssueModal(issueId: string) {
@@ -43,7 +55,7 @@ export class IssueCardComponent implements OnChanges {
       nzClosable: false,
       nzFooter: null,
       nzComponentParams: {
-        issue$: this._projectQuery.issueById$(issueId)
+        issue$: this.issueById$(issueId)
       }
     });
   }

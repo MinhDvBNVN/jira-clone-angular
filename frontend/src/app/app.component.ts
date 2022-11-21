@@ -1,9 +1,10 @@
 import { Component, ViewEncapsulation, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { environment } from '../environments/environment';
-import { ProjectQuery } from './project/state/project/project.query';
-import { ProjectService } from './project/state/project/project.service';
 import { GoogleAnalyticsService } from './core/services/google-analytics.service';
+import {Store} from '@ngrx/store';
+import * as projectSelector from '../app/project/state/selectors/project.selector';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,17 +13,17 @@ import { GoogleAnalyticsService } from './core/services/google-analytics.service
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements AfterViewInit {
+  isLoading$: Observable<any>;
   constructor(
     public router: Router,
-    public projectQuery: ProjectQuery,
+    public store: Store,
     private _cdr: ChangeDetectorRef,
-    private _projectService: ProjectService,
     private _googleAnalytics: GoogleAnalyticsService
   ) {
-    this._projectService.setLoading(true);
     if (environment.production) {
       this.handleGoogleAnalytics();
     }
+    this.isLoading$ = this.store.select(projectSelector.isLoading);
   }
 
   handleGoogleAnalytics() {

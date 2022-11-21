@@ -14,7 +14,9 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { QuillModule } from 'ngx-quill';
 import {StoreModule} from '@ngrx/store';
 import {reducers} from './project/state';
-
+import {EffectsModule} from '@ngrx/effects';
+import {AuthEffect} from '@trungk18/project/state/effects/auth.effect';
+import {ProjectEffect} from '@trungk18/project/state/effects/project.effect';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -26,6 +28,7 @@ import {reducers} from './project/state';
     NzSpinModule,
     NzIconModule.forRoot([]),
     StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffect, ProjectEffect]),
     environment.production ? [] : AkitaNgDevtools,
     AkitaNgRouterStoreModule,
     QuillModule.forRoot()

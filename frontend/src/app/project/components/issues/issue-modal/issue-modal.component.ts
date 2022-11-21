@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JIssue } from '@trungk18/interface/issue';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Observable } from 'rxjs';
 import { DeleteIssueModel } from '@trungk18/interface/ui-model/delete-issue-model';
+import {Store} from '@ngrx/store';
+import * as projectAction from '../../../state/actions/project.action';
 
 @Component({
   selector: 'issue-modal',
@@ -17,7 +18,7 @@ export class IssueModalComponent implements OnInit {
   constructor(
     private _modal: NzModalRef,
     private _router: Router,
-    private _projectService: ProjectService
+    private store: Store
   ) {}
 
   ngOnInit(): void {}
@@ -32,7 +33,7 @@ export class IssueModalComponent implements OnInit {
   }
 
   deleteIssue({ issueId, deleteModalRef }: DeleteIssueModel) {
-    this._projectService.deleteIssue(issueId);
+    this.store.dispatch(projectAction.deleteIssueSuccess({issueId}));
     deleteModalRef.close();
     this.closeModal();
   }

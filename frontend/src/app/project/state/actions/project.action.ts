@@ -1,4 +1,5 @@
 import {createAction, props} from '@ngrx/store';
+import {JIssue} from "@trungk18/interface/issue";
 
 export const GET_PROJECT = '[Project] Get Project';
 export const GET_PROJECT_SUCCESS = '[Project] Get Project Success';
@@ -27,7 +28,7 @@ export const getProject  = createAction(
 
 export const getProjectSuccess = createAction(
   GET_PROJECT_SUCCESS,
-  props<any>()
+  props<{project}>()
 );
 
 export const getProjectFailure = createAction(
@@ -41,7 +42,7 @@ export const updateIssue  = createAction(
 
 export const updateIssueSuccess = createAction(
   UPDATE_ISSUE_SUCCESS,
-  props<any>()
+  props<{newIssue: JIssue}>()
 );
 
 export const updateIssueFailure = createAction(
@@ -55,7 +56,7 @@ export const updateProject  = createAction(
 
 export const updateProjectSuccess = createAction(
   UPDATE_PROJECT_SUCCESS,
-  props<any>()
+  props<{formValue}>()
 );
 
 export const updateProjectFailure = createAction(
@@ -69,7 +70,7 @@ export const deleteIssue  = createAction(
 
 export const deleteIssueSuccess = createAction(
   DELETE_ISSUE_SUCCESS,
-  props<any>()
+  props<{issueId}>()
 );
 
 export const deleteIssueFailure = createAction(
@@ -83,7 +84,7 @@ export const updateIssueComment  = createAction(
 
 export const updateIssueCommentSuccess = createAction(
   UPDATE_ISSUE_COMMENT_SUCCESS,
-  props<any>()
+  props<{issueId, comment}>()
 );
 
 export const updateIssueCommentFailure = createAction(

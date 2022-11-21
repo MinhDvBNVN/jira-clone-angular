@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { Observable, of, combineLatest } from 'rxjs';
 import { catchError, debounceTime, filter, switchMap, take, map } from 'rxjs/operators';
-import { ProjectQuery } from './state/project/project.query';
-import { ProjectService } from './state/project/project.service';
 import { ProjectState } from './state/project/project.store';
+import * as projectSelector from '../project/state/selectors/project.selector';
+import * as projectAction from '../project/state/actions/project.action';
+import {Store} from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectGuard implements CanActivate {
-  constructor(private _projectQuery: ProjectQuery, private _projectService: ProjectService) {}
+  constructor(private store: Store) {}
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.getFromStoreOrApi().pipe(
       switchMap(() => of(true)),
@@ -19,10 +20,10 @@ export class ProjectGuard implements CanActivate {
   }
 
   getFromStoreOrApi(): Observable<ProjectState> {
-    return combineLatest([this._projectQuery.all$, this._projectQuery.isLoading$]).pipe(
+    return combineLatest([this.store.select(projectSelector.all$), this.store.select(projectSelector.isLoading)]).pipe(
       map(([state, loading]) => {
         if (!loading) {
-          this._projectService.getProject();
+          this.store.dispatch(projectAction.getProject());
         }
         return state;
       }),

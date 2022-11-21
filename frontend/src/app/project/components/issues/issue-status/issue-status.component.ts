@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IssueStatus, IssueStatusDisplay, JIssue } from '@trungk18/interface/issue';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
-
+import {Store} from '@ngrx/store';
+import * as projectSelector from '../../../state/selectors/project.selector';
+import * as projectAction from '../../../state/actions/project.action';
+import {filter, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 @Component({
   selector: 'issue-status',
   templateUrl: './issue-status.component.html',
@@ -21,7 +23,7 @@ export class IssueStatusComponent implements OnInit {
 
   issueStatuses: IssueStatusValueTitle[];
 
-  constructor(private _projectService: ProjectService, private _projectQuery: ProjectQuery) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.issueStatuses = [
@@ -32,12 +34,20 @@ export class IssueStatusComponent implements OnInit {
     ];
   }
 
+  lastIssuePosition = (status: IssueStatus): Observable<number> => {
+    return this.store.select(projectSelector.issues$)
+      .pipe(filter((x: any) => {
+        return x.status === status;
+      }), map((i: any) => i.length));
+  }
+
   updateIssue(status: IssueStatus) {
-    let newPosition = this._projectQuery.lastIssuePosition(status);
-    this._projectService.updateIssue({
-      ...this.issue,
-      status,
-      listPosition: newPosition + 1
+    this.lastIssuePosition(status).subscribe(length => {
+      this.store.dispatch(projectAction.updateIssueSuccess({newIssue: {
+          ...this.issue,
+          status,
+          listPosition: length + 1
+        }}));
     });
   }
 
