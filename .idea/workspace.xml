@@ -2,51 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc0140e5-8b3c-47e9-bfd2-785f5e58fe18" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/project/state/effects/auth.effect.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/project/state/effects/project.effect.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/entity/user.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/core/directives/autofocus.directive.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/core/directives/autofocus.directive.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/auth/auth.query.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/auth/auth.store.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/add-issue-modal/add-issue-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/add-issue-modal/add-issue-modal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/board/board-dnd-list/board-dnd-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/board/board-dnd-list/board-dnd-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/board/board-dnd/board-dnd.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/board/board-dnd/board-dnd.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/app.controller.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/app.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/app.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/auth/auth.controller.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/project/project.controller.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/project/project.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/project/project.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/board/board-dnd/board-dnd.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/board/board-dnd/board-dnd.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/board/board-filter/board-filter.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/board/board-filter/board-filter.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/board/board-filter/board-filter.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/board/board-filter/board-filter.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-assignees/issue-assignees.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-assignees/issue-assignees.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-card/issue-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-card/issue-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-comment/issue-comment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-comment/issue-comment.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-description/issue-description.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-description/issue-description.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-detail/issue-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-detail/issue-detail.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-detail/issue-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-detail/issue-detail.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-modal/issue-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-modal/issue-modal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-priority/issue-priority.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-priority/issue-priority.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-reporter/issue-reporter.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-reporter/issue-reporter.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-status/issue-status.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-status/issue-status.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-title/issue-title.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-title/issue-title.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-type/issue-type.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/issues/issue-type/issue-type.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/navigation/navbar-left/navbar-left.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/navigation/navbar-left/navbar-left.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/navigation/navbar-left/navbar-left.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/navigation/navbar-left/navbar-left.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/navigation/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/navigation/sidebar/sidebar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/components/search/search-drawer/search-drawer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/components/search/search-drawer/search-drawer.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/pages/board/board.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/pages/board/board.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/pages/full-issue-detail/full-issue-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/pages/full-issue-detail/full-issue-detail.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/pages/settings/settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/pages/settings/settings.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/project/project.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/project.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/project.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/project.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/actions/filter.action.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/state/actions/filter.action.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/actions/project.action.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/state/actions/project.action.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/filter/filter.query.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/filter/filter.store.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/project/project.query.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/project/project.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/state/project/project.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/project/project.store.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/reducers/filter.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/state/reducers/filter.reducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/project/state/reducers/project.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/project/state/reducers/project.reducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,17 +46,21 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../angular-ngrx-example" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="C:/SourceCode/mobile/Mobile_Service" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="D:\Source\jira-clone-angular\backend\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Study\SourceCode\jira-clone-angular\backend\node_modules\typescript\lib" />
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -104,21 +77,38 @@
       <workItem from="1668583725220" duration="1515000" />
       <workItem from="1668585259543" duration="9212000" />
       <workItem from="1668745439429" duration="6488000" />
+      <workItem from="1670766306053" duration="7849000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="552" y="181" key="#ESLint" timestamp="1670770089730">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="181" key="#ESLint/0.0.1920.1040@0.0.1920.1040" timestamp="1670770089730" />
+    <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1670767917554">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="278" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1670767917554" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1670768297137">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1670768297137" />
   </component>
 </project>

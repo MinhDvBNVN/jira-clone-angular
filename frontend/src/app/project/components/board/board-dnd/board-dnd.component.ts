@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import {Component, OnInit} from '@angular/core';
+import {UntilDestroy} from '@ngneat/until-destroy';
 import {IssueStatus, JIssue} from '@trungk18/interface/issue';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
@@ -33,10 +33,9 @@ export class BoardDndComponent implements OnInit {
   issueByStatusSorted$ = (status: IssueStatus): Observable<JIssue[]> => {
     return this.store.select(projectSelector.issues$).pipe(
       map((issues) => {
-        const filteredIssues = issues
+        return issues
           .filter((x) => x.status === status)
           .sort((a, b) => a.listPosition - b.listPosition);
-        return filteredIssues;
       })
     );
   }

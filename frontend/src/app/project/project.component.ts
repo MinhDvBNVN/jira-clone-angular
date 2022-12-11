@@ -26,7 +26,6 @@ export class ProjectComponent implements OnInit {
   handleResize() {
     const match = window.matchMedia('(min-width: 1024px)');
     match.addEventListener('change', (e) => {
-      console.log(e)
       this.expanded = e.matches;
     });
   }

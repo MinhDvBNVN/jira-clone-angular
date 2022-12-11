@@ -47,8 +47,9 @@ const projectRecuder = createReducer(
   }),
   on(projectAction.updateIssue, (state, result) => ({...state, isLoading: true})),
   on(projectAction.updateIssueSuccess, (state, action) => {
-    action.newIssue.updatedAt = DateUtil.getNow();
-    const issues = arrayUpsert(state.issues, action.newIssue.id, action.newIssue);
+    const newIssue = Object.assign({}, action.newIssue);
+    newIssue.updatedAt = DateUtil.getNow();
+    const issues = arrayUpsert(state.issues, newIssue.id, newIssue);
     return {
       ...state,
       issues,
