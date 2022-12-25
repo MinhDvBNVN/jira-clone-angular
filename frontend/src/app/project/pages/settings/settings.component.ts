@@ -45,6 +45,7 @@ export class SettingsComponent implements OnInit {
 
   initForm() {
     this.projectForm = this._fb.group({
+      id: this.project?.id,
       name: ['', NoWhitespaceValidator()],
       url: [''],
       description: [''],
@@ -57,13 +58,14 @@ export class SettingsComponent implements OnInit {
       name: project.name,
       url: project.url,
       description: project.description,
-      category: project.category
+      category: project.category,
+      id: project.id
     });
   }
 
   submitForm() {
     const formValue: Partial<JProject> = this.projectForm.getRawValue();
-    this.store.dispatch(projectAction.updateProjectSuccess({formValue}));
+    this.store.dispatch(projectAction.updateProject({formValue}));
     this._notification.create(
       'success',
       'Changes have been saved successfully.',

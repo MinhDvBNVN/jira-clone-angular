@@ -1,11 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProjectController } from './project/project.controller';
 import { AuthController } from './auth/auth.controller';
-import {UserEntity} from "./entity/user.entity";
-import {Repository} from "typeorm";
 import {TypeOrmModule} from "@nestjs/typeorm";
+import {ProjectModule} from "./project/project.module";
+import {IssueModule} from "./issue/issue.module";
+import {ProjectEntity} from "./project/project.entity";
+import {IssueEntity} from "./issue/issue.entity";
+import {UserEntity} from "./entity/user.entity";
+import {CommentEntity} from "./entity/comment.entity";
 
 @Module({
   imports: [
@@ -16,12 +19,13 @@ import {TypeOrmModule} from "@nestjs/typeorm";
           username: 'root',
           password: '123456',
           database: 'jira_clone',
-          entities: [UserEntity],
-          synchronize: true,
+          entities: [ProjectEntity, IssueEntity, UserEntity, CommentEntity],
+          synchronize: true
       }),
-      TypeOrmModule.forFeature([UserEntity])
+      ProjectModule,
+      IssueModule
   ],
-  controllers: [AppController, ProjectController, AuthController],
+  controllers: [AppController, AuthController],
   providers: [AppService],
 })
 export class AppModule {}

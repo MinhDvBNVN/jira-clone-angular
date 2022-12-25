@@ -3,9 +3,9 @@ import { JUser } from './user';
 export class JComment {
   constructor(issueId: string, user: JUser) {
     let now = new Date();
-    this.id = `${now.getTime()}`;
     this.issueId = issueId;
     this.user = user;
+    this.userId = user.id;
     this.createdAt = now.toISOString();
     this.updatedAt = now.toISOString();
   }

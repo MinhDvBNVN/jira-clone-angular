@@ -22,7 +22,7 @@ export class IssueTitleComponent implements OnChanges {
   }
 
   onBlur() {
-    this.store.dispatch(projectAction.updateIssueSuccess({newIssue: {
+    this.store.dispatch(projectAction.updateIssue({newIssue: {
         ...this.issue,
         title: this.titleControl.value
       }}));

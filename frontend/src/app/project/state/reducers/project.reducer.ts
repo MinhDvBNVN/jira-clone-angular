@@ -3,6 +3,7 @@ import {Action, createReducer, on} from '@ngrx/store';
 import * as projectAction from '../actions/project.action';
 import {DateUtil} from '@trungk18/project/utils/date';
 import {arrayRemove, arrayUpsert} from '@datorama/akita';
+import {JIssue} from "@trungk18/interface/issue";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ProjectState extends JProject {
@@ -45,10 +46,19 @@ const projectRecuder = createReducer(
       isLoading: false
     };
   }),
+  on(projectAction.createIssue, (state) => ({...state, isLoading: true})),
+  on(projectAction.createIssueSuccess, (state, action) => {
+    const newIssue = Object.assign({}, action.newIssue);
+    const issues = arrayUpsert(state.issues, newIssue.id, newIssue);
+    return {
+      ...state,
+      issues,
+      isLoading: false
+    };
+  }),
   on(projectAction.updateIssue, (state, result) => ({...state, isLoading: true})),
   on(projectAction.updateIssueSuccess, (state, action) => {
     const newIssue = Object.assign({}, action.newIssue);
-    newIssue.updatedAt = DateUtil.getNow();
     const issues = arrayUpsert(state.issues, newIssue.id, newIssue);
     return {
       ...state,
@@ -67,16 +77,20 @@ const projectRecuder = createReducer(
   }),
   on(projectAction.updateIssueComment, (state, result) => ({...state, isLoading: true})),
   on(projectAction.updateIssueCommentSuccess, (state, action) => {
-    const allIssues = state.issues;
-    const issue = allIssues.find((x) => x.id === action.issueId);
+    let allIssues = state.issues;
+    let issue: JIssue = allIssues.find((x) => x.id === action.issueId);
     if (!issue) {
       return;
     }
-    const comments = arrayUpsert(issue.comments ?? [], action.comment.id, action.comment);
+    issue = {
+      ...issue,
+      comments: arrayUpsert(issue.comments ?? [], action.comment.id, action.comment)
+    };
+    allIssues = arrayUpsert(allIssues, issue.id, issue);
     return  {
       ...state,
-      ...issue,
-      comments
+      isLoading: false,
+      issues: allIssues
     };
   })
 );

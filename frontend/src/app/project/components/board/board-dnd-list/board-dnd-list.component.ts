@@ -53,14 +53,14 @@ export class BoardDndListComponent implements OnInit {
       );
       this.updateListPosition(newIssues);
       newIssue.status = event.container.id as IssueStatus;
-      this.store.dispatch(projectAction.updateIssueSuccess({newIssue}));
+      this.store.dispatch(projectAction.updateIssue({newIssue}));
     }
   }
 
   private updateListPosition(newList: JIssue[]) {
     newList.forEach((issue, idx) => {
       const newIssueWithNewPosition = { ...issue, listPosition: idx + 1 };
-      this.store.dispatch(projectAction.updateIssueSuccess({newIssue: newIssueWithNewPosition}));
+      this.store.dispatch(projectAction.updateIssue({newIssue: newIssueWithNewPosition}));
     });
   }
 

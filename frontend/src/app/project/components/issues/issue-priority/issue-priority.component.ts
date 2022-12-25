@@ -37,7 +37,7 @@ export class IssuePriorityComponent implements OnInit, OnChanges {
 
   updateIssue(priority: IssuePriority) {
     this.selectedPriority = priority;
-    this.store.dispatch(projectAction.updateIssueSuccess({newIssue: {
+    this.store.dispatch(projectAction.updateIssue({newIssue: {
         ...this.issue,
         priority: this.selectedPriority
       }}));

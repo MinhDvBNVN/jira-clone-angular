@@ -28,7 +28,7 @@ export class IssueTypeComponent implements OnInit, OnChanges {
   ngOnChanges(): void {}
 
   updateIssue(issueType: IssueType) {
-    this.store.dispatch(projectAction.updateIssueSuccess({
+    this.store.dispatch(projectAction.updateIssue({
       newIssue: {
         ...this.issue,
         type: issueType

@@ -1,5 +1,5 @@
 export const Project = {
-  id: '140892',
+  id: 140892,
   name: 'Angular Jira Clone',
   url: 'https://github.com/trungk18/jira-clone-angular',
   description: 'A Jira clone app built with Angular and Akita - by trungk18',
@@ -8,39 +8,39 @@ export const Project = {
   updatedAt: '2020-06-13T16:00:00.000Z',
   users: [
     {
-      id: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
+      id: 2,
       name: 'Trung Vo',
       avatarUrl:
         'https://res.cloudinary.com/dvujyxh7e/image/upload/c_scale,w_48/v1593253478/trung-vo_bioxmc.png',
-      projectId: '140892',
+      projectId: 140892,
     },
     {
-      id: '7ac265f9-b9ac-443f-a2b2-795682e579a4',
+      id: 3,
       name: 'Iron Man',
       avatarUrl:
         'https://res.cloudinary.com/dvujyxh7e/image/upload/c_scale,w_48/v1592405732/ironman_c3jrbc.jpg',
-      projectId: '140892',
+      projectId: 140892,
     },
     {
-      id: '94502aad-c97f-43e1-a9d1-28cf3e4937a7',
+      id: 4,
       name: 'Captain',
       avatarUrl:
         'https://res.cloudinary.com/dvujyxh7e/image/upload/c_scale,w_48/v1592405732/captain_e8s9nk.jpg',
-      projectId: '140892',
+      projectId: 140892,
     },
     {
-      id: '610451aa-10c8-4d7e-9363-311357c0b0dd',
+      id: 5,
       name: 'Thor',
       avatarUrl:
         'https://res.cloudinary.com/dvujyxh7e/image/upload/c_scale,w_48/v1592405731/thor_juqwzf.jpg',
-      projectId: '140892',
+      projectId: 140892,
     },
     {
-      id: '081ccaa1-5595-4621-8074-ede4927e67b0',
+      id: 6,
       name: 'Spider Man',
       avatarUrl:
         'https://res.cloudinary.com/dvujyxh7e/image/upload/c_scale,w_48/v1592405731/spiderman_zlrtx0.jpg',
-      projectId: '140892',
+      projectId: 140892,
     },
   ],
   issues: [
@@ -55,10 +55,10 @@ export const Project = {
       listPosition: 1,
       createdAt: '2020-06-12T14:40:01.262Z',
       updatedAt: '2020-06-12T14:40:01.262Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
+      reporterId: 2,
       userIds: [
-        'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
-        '7ac265f9-b9ac-443f-a2b2-795682e579a4',
+        2,
+        3,
       ],
     },
     {
@@ -72,10 +72,10 @@ export const Project = {
       listPosition: 2,
       createdAt: '2020-06-12T14:40:01.262Z',
       updatedAt: '2020-06-12T14:40:01.262Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
+      reporterId: 2,
       userIds: [
-        'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
-        '94502aad-c97f-43e1-a9d1-28cf3e4937a7',
+        2,
+        4,
       ],
     },
     {
@@ -89,8 +89,8 @@ export const Project = {
       listPosition: 3,
       createdAt: '2020-06-12T14:40:01.346Z',
       updatedAt: '2020-06-12T14:40:01.346Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
-      userIds: ['081ccaa1-5595-4621-8074-ede4927e67b0'],
+      reporterId: 2,
+      userIds: [6],
     },
     {
       id: '9451',
@@ -103,8 +103,8 @@ export const Project = {
       listPosition: 1,
       createdAt: '2020-06-12T14:40:01.262Z',
       updatedAt: '2020-06-12T14:48:00.807Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
-      userIds: ['d65047e5-f4cf-4caa-9a38-6073dcbab7d1'],
+      reporterId: 2,
+      userIds: [2],
     },
     {
       id: '9631',
@@ -118,10 +118,10 @@ export const Project = {
       listPosition: 2,
       createdAt: '2020-06-12T14:40:01.350Z',
       updatedAt: '2020-06-12T14:51:09.653Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
+      reporterId: 2,
       userIds: [
-        '610451aa-10c8-4d7e-9363-311357c0b0dd',
-        '94502aad-c97f-43e1-a9d1-28cf3e4937a7',
+        5,
+        4,
       ],
     },
     {
@@ -135,8 +135,8 @@ export const Project = {
       listPosition: 1,
       createdAt: '2020-06-12T14:40:01.304Z',
       updatedAt: '2020-06-12T14:52:02.173Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
-      userIds: ['d65047e5-f4cf-4caa-9a38-6073dcbab7d1'],
+      reporterId: 2,
+      userIds: [2],
     },
     {
       id: '9548',
@@ -149,8 +149,8 @@ export const Project = {
       listPosition: 1,
       createdAt: '2020-06-12T14:40:01.304Z',
       updatedAt: '2020-06-12T14:52:02.173Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
-      userIds: ['d65047e5-f4cf-4caa-9a38-6073dcbab7d1'],
+      reporterId: 2,
+      userIds: [2],
     },
     {
       id: '9584',
@@ -163,10 +163,10 @@ export const Project = {
       listPosition: 2,
       createdAt: '2020-06-12T14:40:00.000Z',
       updatedAt: '2020-06-12T14:51:00.000Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
+      reporterId: 2,
       userIds: [
-        '081ccaa1-5595-4621-8074-ede4927e67b0',
-        '610451aa-10c8-4d7e-9363-311357c0b0dd',
+        6,
+        5,
       ],
     },
     {
@@ -180,8 +180,8 @@ export const Project = {
       listPosition: 3,
       createdAt: '2020-06-12T14:40:00.000Z',
       updatedAt: '2020-06-12T14:51:00.000Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
-      userIds: ['d65047e5-f4cf-4caa-9a38-6073dcbab7d1'],
+      reporterId: 2,
+      userIds: [2],
     },
     {
       id: '9665',
@@ -194,10 +194,10 @@ export const Project = {
       listPosition: 1,
       createdAt: '2020-06-12T14:40:00.000Z',
       updatedAt: '2020-06-12T14:51:00.000Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
+      reporterId: 2,
       userIds: [
-        '94502aad-c97f-43e1-a9d1-28cf3e4937a7',
-        '7ac265f9-b9ac-443f-a2b2-795682e579a4',
+        4,
+        3,
       ],
     },
     {
@@ -212,8 +212,8 @@ export const Project = {
       listPosition: 1,
       createdAt: '2020-06-28T15:30:00.000Z',
       updatedAt: '2020-06-28T16:30:00.000Z',
-      reporterId: 'd65047e5-f4cf-4caa-9a38-6073dcbab7d1',
-      userIds: ['d65047e5-f4cf-4caa-9a38-6073dcbab7d1'],
+      reporterId: 2,
+      userIds: [2],
     },
   ],
 };

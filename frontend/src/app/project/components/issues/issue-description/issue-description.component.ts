@@ -35,7 +35,7 @@ export class IssueDescriptionComponent implements OnChanges, OnInit {
   }
 
   save() {
-    this.store.dispatch(projectAction.updateIssueSuccess({newIssue: {
+    this.store.dispatch(projectAction.updateIssue({newIssue: {
         ...this.issue,
         description: this.descriptionControl.value
       }}));

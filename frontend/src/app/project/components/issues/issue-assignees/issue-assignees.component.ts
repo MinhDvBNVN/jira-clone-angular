@@ -22,22 +22,24 @@ export class IssueAssigneesComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const issueChange = changes.issue;
-    if (this.users && issueChange.currentValue !== issueChange.previousValue) {
-      this.assignees = this.issue.userIds.map((userId) => this.users.find((x) => x.id === userId));
+    if ('issue' in changes) {
+      const issueChange = changes.issue;
+      if (this.users && issueChange.currentValue !== issueChange.previousValue) {
+        this.assignees = this.issue.userIds.map((userId) => this.users.find((x) => x.id === userId));
+      }
     }
   }
 
   removeUser(userId: string) {
     const newUserIds = this.issue.userIds.filter((x) => x !== userId);
-    this.store.dispatch(projectAction.updateIssueSuccess({newIssue: {
+    this.store.dispatch(projectAction.updateIssue({newIssue: {
         ...this.issue,
         userIds: newUserIds
       }}));
   }
 
   addUserToIssue(user: JUser) {
-    this.store.dispatch(projectAction.updateIssueSuccess({newIssue: {
+    this.store.dispatch(projectAction.updateIssue({newIssue: {
         ...this.issue,
         userIds: [...this.issue.userIds, user.id]
       }}));

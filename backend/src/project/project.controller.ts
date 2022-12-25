@@ -1,17 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
-import { Project } from './projects';
-import {InjectRepository} from "@nestjs/typeorm";
-import {UserEntity} from "../entity/user.entity";
-import {Repository} from "typeorm";
+import {Body, Controller, Get, Param, ParseIntPipe, Put} from '@nestjs/common';
+import {ProjectService} from "./project.service";
+import {ProjectEntity} from "./project.entity";
 
 @Controller('project')
 export class ProjectController {
-  constructor(@InjectRepository(UserEntity) private userRepository: Repository<UserEntity>) {
-  }
+  constructor(private projectService: ProjectService) {}
+
   @Get()
   async getProject() {
-    const result = await this.userRepository.find();
-    console.log(JSON.stringify(result));
-    return Project;
+    return await this.projectService.getProjects();
+  }
+
+  @Put(':id')
+  async updateProject(@Param('id', ParseIntPipe) id: number, @Body() payload: ProjectEntity) {
+    return await  this.projectService.updateProject(id, payload);
   }
 }

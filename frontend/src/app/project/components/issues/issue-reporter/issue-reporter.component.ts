@@ -21,9 +21,11 @@ export class IssueReporterComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
-    const issueChange = changes.issue;
-    if (this.users && issueChange.currentValue !== issueChange.previousValue) {
-      this.reporter = this.users.find((x) => x.id === this.issue.reporterId);
+    if ('issue' in changes) {
+      const issueChange = changes.issue;
+      if (this.users && issueChange.currentValue !== issueChange.previousValue) {
+        this.reporter = this.users.find((x) => x.id === this.issue.reporterId);
+      }
     }
   }
 
@@ -32,7 +34,7 @@ export class IssueReporterComponent implements OnInit, OnChanges {
   }
 
   updateIssue(user: JUser) {
-    this.store.dispatch(projectAction.updateIssueSuccess({
+    this.store.dispatch(projectAction.updateIssue({
       newIssue: {
         ...this.issue,
         reporterId: user.id

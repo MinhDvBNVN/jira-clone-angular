@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {JIssue} from "@trungk18/interface/issue";
+import {JIssue} from '@trungk18/interface/issue';
 
 export const GET_PROJECT = '[Project] Get Project';
 export const GET_PROJECT_SUCCESS = '[Project] Get Project Success';
@@ -8,6 +8,10 @@ export const GET_PROJECT_FAILURE = '[Project] Get Project Failure';
 export const UPDATE_PROJECT = '[Project] Update Project';
 export const UPDATE_PROJECT_SUCCESS = '[Project] Update Project Success';
 export const UPDATE_PROJECT_FAILURE = '[Project] Update Project Failure';
+
+export const CREATE_ISSUE = '[Project] Create Issue';
+export const CREATE_ISSUE_SUCCESS = '[Project] Create Issue Success';
+export const CREATE_ISSUE_FAILURE = '[Project] Create Issue Failure';
 
 export const UPDATE_ISSUE = '[Project] Update Issue';
 export const UPDATE_ISSUE_SUCCESS = '[Project] Update Issue Success';
@@ -36,8 +40,24 @@ export const getProjectFailure = createAction(
   props<any>()
   );
 
+export const createIssue = createAction(
+  CREATE_ISSUE,
+  props<{newIssue: JIssue}>()
+);
+
+export const createIssueSuccess = createAction(
+  CREATE_ISSUE_SUCCESS,
+  props<{newIssue: JIssue}>()
+);
+
+export const createIssueFailure = createAction(
+  CREATE_ISSUE_FAILURE,
+  props<any>()
+);
+
 export const updateIssue  = createAction(
-  UPDATE_ISSUE
+  UPDATE_ISSUE,
+  props<{newIssue: JIssue}>()
 );
 
 export const updateIssueSuccess = createAction(
@@ -51,7 +71,8 @@ export const updateIssueFailure = createAction(
 );
 
 export const updateProject  = createAction(
-  UPDATE_PROJECT
+  UPDATE_PROJECT,
+  props<{formValue}>()
 );
 
 export const updateProjectSuccess = createAction(
@@ -65,7 +86,8 @@ export const updateProjectFailure = createAction(
 );
 
 export const deleteIssue  = createAction(
-  DELETE_ISSUE
+  DELETE_ISSUE,
+  props<{issueId}>()
 );
 
 export const deleteIssueSuccess = createAction(
@@ -79,7 +101,8 @@ export const deleteIssueFailure = createAction(
 );
 
 export const updateIssueComment  = createAction(
-  UPDATE_ISSUE_COMMENT
+  UPDATE_ISSUE_COMMENT,
+  props<{issueId, comment}>()
 );
 
 export const updateIssueCommentSuccess = createAction(

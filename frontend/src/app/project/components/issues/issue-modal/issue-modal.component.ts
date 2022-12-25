@@ -33,7 +33,7 @@ export class IssueModalComponent implements OnInit {
   }
 
   deleteIssue({ issueId, deleteModalRef }: DeleteIssueModel) {
-    this.store.dispatch(projectAction.deleteIssueSuccess({issueId}));
+    this.store.dispatch(projectAction.deleteIssue({issueId}));
     deleteModalRef.close();
     this.closeModal();
   }

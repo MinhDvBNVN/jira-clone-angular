@@ -6,6 +6,7 @@ import { JUser } from '@trungk18/interface/user';
 import * as authSelector from '../../../state/selectors/auth.selector';
 import * as projectAction from '../../../state/actions/project.action';
 import {Store} from '@ngrx/store';
+import {AuthState} from "@trungk18/project/state/reducers/auth.reducer";
 
 @Component({
   selector: 'issue-comment',
@@ -37,8 +38,8 @@ export class IssueCommentComponent implements OnInit {
 
   ngOnInit(): void {
     this.commentControl = new FormControl('');
-    this.store.select(authSelector.user$).pipe(untilDestroyed(this)).subscribe((user) => {
-      this.user = user;
+    this.store.select(authSelector.user$).pipe(untilDestroyed(this)).subscribe((user: AuthState) => {
+      this.user = user.user;
       if (this.createMode) {
         this.comment = new JComment(this.issueId, this.user);
       }
@@ -51,11 +52,11 @@ export class IssueCommentComponent implements OnInit {
 
   addComment() {
     const now = new Date();
-    this.store.dispatch(projectAction.updateIssueCommentSuccess({
+    this.store.dispatch(projectAction.updateIssueComment({
       issueId: this.issueId,
       comment: {
         ...this.comment,
-        id: `${now.getTime()}`,
+        id: null,
         createdAt: now.toISOString(),
         updatedAt: now.toISOString(),
         body: this.commentControl.value

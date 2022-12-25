@@ -1,5 +1,6 @@
 import {Action, createReducer, on} from "@ngrx/store";
 import * as authAction from '@trungk18/project/state/actions/auth.action';
+import {JUser} from "@trungk18/interface/user";
 
 export interface AuthState {
   id: string;
@@ -11,6 +12,7 @@ export interface AuthState {
   issueIds: string[];
   isLoading: boolean;
   token: string;
+  user?: JUser;
 }
 
 export const initialState: AuthState = {

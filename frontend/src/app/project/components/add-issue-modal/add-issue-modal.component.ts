@@ -65,16 +65,14 @@ export class AddIssueModalComponent implements OnInit {
     if (this.issueForm.invalid) {
       return;
     }
-    const now = DateUtil.getNow();
     const issue: JIssue = {
       ...this.issueForm.getRawValue(),
-      id: IssueUtil.getRandomId(),
       status: IssueStatus.BACKLOG,
-      createdAt: now,
-      updatedAt: now
+      createdAt: new Date(),
+      updatedAt: new Date()
     };
 
-    this.store.dispatch(projectAction.updateIssueSuccess({newIssue: issue}));
+    this.store.dispatch(projectAction.createIssue({newIssue: issue}));
     this.closeModal();
   }
 

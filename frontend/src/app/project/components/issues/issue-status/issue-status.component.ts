@@ -43,7 +43,7 @@ export class IssueStatusComponent implements OnInit {
 
   updateIssue(status: IssueStatus) {
     this.lastIssuePosition(status).subscribe(length => {
-      this.store.dispatch(projectAction.updateIssueSuccess({newIssue: {
+      this.store.dispatch(projectAction.updateIssue({newIssue: {
           ...this.issue,
           status,
           listPosition: length + 1
