@@ -14,10 +14,10 @@ import {CommentEntity} from "./entity/comment.entity";
   imports: [
       TypeOrmModule.forRoot({
           type: 'mysql',
-          host: '127.0.0.1',
+          host: 'demo-aws.ct1dx0zyt0qg.ap-southeast-1.rds.amazonaws.com',
           port: 3306,
-          username: 'root',
-          password: '123456',
+          username: 'admin',
+          password: '12345678',
           database: 'jira_clone',
           entities: [ProjectEntity, IssueEntity, UserEntity, CommentEntity],
           synchronize: true
