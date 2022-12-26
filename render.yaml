@@ -2,6 +2,7 @@ services:
   - type: web
     name: app-backend
     branch: master
+    env: node
     # Build and deploy `app-backend` if any files change
     # within the `backend` or `community/docker` folders.
     rootDir: backend
