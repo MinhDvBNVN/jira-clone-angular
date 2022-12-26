@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: app-backend
+    branch: master
+#    env: go
+    # Build and deploy `app-backend` if any files change
+    # within the `backend` or `community/docker` folders.
+    rootDir: backend
+    buildCommand: npm build
+    staticPublishPath: ./backend/dist/
+    startCommand: node main.js
+#    buildFilter:
